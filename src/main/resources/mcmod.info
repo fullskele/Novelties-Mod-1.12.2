@@ -1,0 +1,16 @@
+[
+{
+  "modid": "eruptionspawner",
+  "name": "Eruption Spawner",
+  "description": "NBT-driven spawners that spew falling blocks.",
+  "version": "1.0.0",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["fullskele"],
+  "credits": "penteractgaming for the commission",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
