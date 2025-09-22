@@ -3,7 +3,7 @@
   "modid": "eruptionspawner",
   "name": "Eruption Spawner",
   "description": "NBT-driven spawners that spew falling blocks.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
