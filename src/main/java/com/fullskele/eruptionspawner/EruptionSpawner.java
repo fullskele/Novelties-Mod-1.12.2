@@ -1,17 +1,15 @@
 package com.fullskele.eruptionspawner;
 
-import com.blamejared.ctgui.client.GuiHandler;
 import com.fullskele.eruptionspawner.blocks.BlockEruptionSpawner;
-import com.fullskele.eruptionspawner.blocks.BlockSmeltCrafter;
+import com.fullskele.eruptionspawner.blocks.BlockOven;
 import com.fullskele.eruptionspawner.blocks.tile.TileEntityEruptionSpawner;
-import com.fullskele.eruptionspawner.blocks.tile.TileSmeltCrafter;
+import com.fullskele.eruptionspawner.blocks.tile.TileOven;
 import com.fullskele.eruptionspawner.proxy.CommonProxy;
-import com.fullskele.eruptionspawner.world.container.gui.SmeltCraftGuiHandler;
+import com.fullskele.eruptionspawner.world.container.gui.OvenGuiHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
@@ -31,7 +29,7 @@ public class EruptionSpawner {
     public static final String NAME = "Eruption Spawner";
     public static final String VERSION = "1.1.0";
     public static final Block ERUPTOR_BLOCK = new BlockEruptionSpawner();
-    public static final Block SMELT_CRAFTER_BLOCK = new BlockSmeltCrafter();
+    public static final Block OVEN_BLOCK = new BlockOven();
 
 
     @Mod.Instance
@@ -45,16 +43,16 @@ public class EruptionSpawner {
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().register(ERUPTOR_BLOCK);
         ForgeRegistries.ITEMS.register(new ItemBlock(ERUPTOR_BLOCK).setRegistryName(ERUPTOR_BLOCK.getRegistryName()));
-        event.getRegistry().register(SMELT_CRAFTER_BLOCK);
-        ForgeRegistries.ITEMS.register(new ItemBlock(SMELT_CRAFTER_BLOCK).setRegistryName(SMELT_CRAFTER_BLOCK.getRegistryName()));
+        event.getRegistry().register(OVEN_BLOCK);
+        ForgeRegistries.ITEMS.register(new ItemBlock(OVEN_BLOCK).setRegistryName(OVEN_BLOCK.getRegistryName()));
 
     }
 
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(EruptionSpawner.INSTANCE, new SmeltCraftGuiHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(EruptionSpawner.INSTANCE, new OvenGuiHandler());
         GameRegistry.registerTileEntity(TileEntityEruptionSpawner.class, MODID + ":" + "tile_entity_eruptor");
-        GameRegistry.registerTileEntity(TileSmeltCrafter.class, MODID + ":" + "tile_smelt_crafter");
+        GameRegistry.registerTileEntity(TileOven.class, MODID + ":" + "tile_oven");
         proxy.preInit(event);
     }
 
@@ -66,6 +64,6 @@ public class EruptionSpawner {
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ERUPTOR_BLOCK), 0, new ModelResourceLocation(ERUPTOR_BLOCK.getRegistryName(), "inventory"));
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(SMELT_CRAFTER_BLOCK), 0, new ModelResourceLocation(SMELT_CRAFTER_BLOCK.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(OVEN_BLOCK), 0, new ModelResourceLocation(OVEN_BLOCK.getRegistryName(), "inventory"));
     }
 }

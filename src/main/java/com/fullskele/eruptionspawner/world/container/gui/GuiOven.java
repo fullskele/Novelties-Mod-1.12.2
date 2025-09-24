@@ -1,21 +1,21 @@
 package com.fullskele.eruptionspawner.world.container.gui;
 
 import com.fullskele.eruptionspawner.EruptionSpawner;
-import com.fullskele.eruptionspawner.blocks.tile.TileSmeltCrafter;
-import com.fullskele.eruptionspawner.world.container.ContainerSmeltCrafter;
+import com.fullskele.eruptionspawner.blocks.tile.TileOven;
+import com.fullskele.eruptionspawner.world.container.ContainerOven;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiSmeltCrafter extends GuiContainer {
-    private static final ResourceLocation BG_TEXTURE = new ResourceLocation(EruptionSpawner.MODID, "textures/gui/smelt_crafter.png");
+public class GuiOven extends GuiContainer {
+    private static final ResourceLocation BG_TEXTURE = new ResourceLocation(EruptionSpawner.MODID, "textures/gui/oven.png");
 
-    private final TileSmeltCrafter tile;
+    private final TileOven tile;
     private final InventoryPlayer playerInventory;
 
-    public GuiSmeltCrafter(ContainerSmeltCrafter container, InventoryPlayer playerInventory, TileSmeltCrafter tile) {
+    public GuiOven(ContainerOven container, InventoryPlayer playerInventory, TileOven tile) {
         super(container);
         this.tile = tile;
         this.playerInventory = playerInventory;
@@ -75,7 +75,7 @@ public class GuiSmeltCrafter extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        fontRenderer.drawString(I18n.format("tile.smelt_crafter.name"), 50, 6, 0x404040);
+        fontRenderer.drawString(I18n.format("tile.oven.name"), 50, 6, 0x404040);
 
         fontRenderer.drawString(
                 playerInventory.getDisplayName().getUnformattedText(),

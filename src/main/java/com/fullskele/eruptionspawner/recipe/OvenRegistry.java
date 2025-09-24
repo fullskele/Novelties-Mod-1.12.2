@@ -8,22 +8,28 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class SmeltCraftRegistry {
-    private static final List<SmeltCraftRecipe> RECIPES = new ArrayList<>();
+public class OvenRegistry {
+    private static final List<OvenRecipe> RECIPES = new ArrayList<>();
 
-    public static void add(SmeltCraftRecipe r) { RECIPES.add(r); }
+    public static void add(OvenRecipe r) { RECIPES.add(r); }
     public static void clear() { RECIPES.clear(); }
-    public static List<SmeltCraftRecipe> all() { return new ArrayList<>(RECIPES); }
 
-    public static SmeltCraftRecipe match(ItemStack[] grid) {
-        for (SmeltCraftRecipe r : RECIPES) {
+    public static OvenRecipe match(ItemStack[] grid) {
+        for (OvenRecipe r : RECIPES) {
             if (matches(r, grid)) return r;
         }
         return null;
     }
 
-    private static boolean matches(SmeltCraftRecipe r, ItemStack[] grid) {
+    private static boolean matches(OvenRecipe r, ItemStack[] grid) {
         IIngredient[] inputs = r.getInputs();
+
+        //To fix the empty oredict bug
+        for (IIngredient ing : inputs) {
+            if (ing != null && ing.getItems().isEmpty()) {
+                return false;
+            }
+        }
 
         if (r.isShapeless()) {
             List<IIngredient> required = new ArrayList<>();
@@ -111,7 +117,7 @@ public class SmeltCraftRegistry {
         return true;
     }
 
-    public static List<SmeltCraftRecipe> getAllRecipes() {
+    public static List<OvenRecipe> getAllRecipes() {
         return new ArrayList<>(RECIPES);
     }
 }

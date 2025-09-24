@@ -1,7 +1,7 @@
 {
   "parent": "block/cube",
   "textures": {
-    "north": "eruptionspawner:blocks/smelt_crafter",
+    "north": "eruptionspawner:blocks/oven_lit",
     "south": "minecraft:blocks/brick",
     "west":  "minecraft:blocks/brick",
     "east":  "minecraft:blocks/brick",

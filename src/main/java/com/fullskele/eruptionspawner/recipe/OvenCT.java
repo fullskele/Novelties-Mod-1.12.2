@@ -12,25 +12,23 @@ import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @ZenRegister
-@ZenClass("mods.eruptionspawner.SmeltCrafter")
-public class SmeltCraftCT {
+@ZenClass("mods.eruptionspawner.Oven")
+public class OvenCT {
 
 
     @ZenMethod
     public static void clear() {
         CraftTweakerAPI.apply(new IAction() {
-            @Override public void apply() { SmeltCraftRegistry.clear(); }
-            @Override public String describe() { return "Cleared SmeltCraft recipes"; }
+            @Override public void apply() { OvenRegistry.clear(); }
+            @Override public String describe() { return "Cleared Oven recipes"; }
         });
     }
 
     @ZenMethod
-    public static void addRecipe(IItemStack output, IIngredient[] inputs, int cookTime, @Optional float xp, @Optional IItemStack[] replacements) {
+    public static void addShaped(IItemStack output, IIngredient[] inputs, int cookTime, @Optional float xp, @Optional IItemStack[] replacements) {
         if (inputs.length != 9) throw new IllegalArgumentException("inputs must be length 9");
 
         final ItemStack outMC = CraftTweakerMC.getItemStack(output).copy();
@@ -48,15 +46,15 @@ public class SmeltCraftCT {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                SmeltCraftRecipe recipe = new SmeltCraftRecipe(inputs, outMC, cookTime <= 0 ? 200 : cookTime, false);
+                OvenRecipe recipe = new OvenRecipe(inputs, outMC, cookTime <= 0 ? 200 : cookTime, false);
                 recipe.setExperience(experience);
                 recipe.setTransformReplacements(replacementsMC);
-                SmeltCraftRegistry.add(recipe);
+                OvenRegistry.add(recipe);
             }
 
             @Override
             public String describe() {
-                return "Added SmeltCraft recipe for " + outMC.getDisplayName();
+                return "Added Oven recipe for " + outMC.getDisplayName();
             }
         });
     }
@@ -64,7 +62,7 @@ public class SmeltCraftCT {
     @ZenMethod
     public static void addShapeless(IItemStack output, IIngredient[] inputs, int cookTime, @Optional float xp, @Optional IItemStack[] replacements) {
         if (inputs.length == 0 || inputs.length > 9)
-            throw new IllegalArgumentException("Shapeless SmeltCraft recipe must have between 1 and 9 ingredients");
+            throw new IllegalArgumentException("Shapeless Oven recipe must have between 1 and 9 ingredients");
 
         final int ct = cookTime <= 0 ? 200 : cookTime;
         final ItemStack outMC = CraftTweakerMC.getItemStack(output).copy();
@@ -86,15 +84,15 @@ public class SmeltCraftCT {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                SmeltCraftRecipe recipe = new SmeltCraftRecipe(paddedInputs, outMC, ct, true);
+                OvenRecipe recipe = new OvenRecipe(paddedInputs, outMC, ct, true);
                 recipe.setExperience(experience);
                 recipe.setTransformReplacements(replacementsMC);
-                SmeltCraftRegistry.add(recipe);
+                OvenRegistry.add(recipe);
             }
 
             @Override
             public String describe() {
-                return "Added Shapeless SmeltCraft recipe for " + outMC.getDisplayName();
+                return "Added Shapeless Oven recipe for " + outMC.getDisplayName();
             }
         });
     }
@@ -103,7 +101,7 @@ public class SmeltCraftCT {
     @ZenMethod
     public static void addShapedMirrored(IItemStack output, IIngredient[] inputs, int cookTime, @Optional float xp, @Optional IItemStack[] replacements) {
         if (inputs.length > 9)
-            throw new IllegalArgumentException("Shaped SmeltCraft recipe cannot have more than 9 ingredients");
+            throw new IllegalArgumentException("Shaped Oven recipe cannot have more than 9 ingredients");
 
         IIngredient[] paddedInputs = new IIngredient[9];
         Arrays.fill(paddedInputs, null);
@@ -125,10 +123,10 @@ public class SmeltCraftCT {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                SmeltCraftRecipe recipeNormal = new SmeltCraftRecipe(paddedInputs, outMC, ct, false);
+                OvenRecipe recipeNormal = new OvenRecipe(paddedInputs, outMC, ct, false);
                 recipeNormal.setExperience(experience);
                 recipeNormal.setTransformReplacements(replacementsMC);
-                SmeltCraftRegistry.add(recipeNormal);
+                OvenRegistry.add(recipeNormal);
 
                 IIngredient[] mirroredInputs = new IIngredient[9];
                 for (int row = 0; row < 3; row++) {
@@ -136,15 +134,15 @@ public class SmeltCraftCT {
                         mirroredInputs[row * 3 + col] = paddedInputs[row * 3 + (2 - col)];
                     }
                 }
-                SmeltCraftRecipe recipeMirrored = new SmeltCraftRecipe(mirroredInputs, outMC, ct, false);
+                OvenRecipe recipeMirrored = new OvenRecipe(mirroredInputs, outMC, ct, false);
                 recipeMirrored.setExperience(experience);
                 recipeMirrored.setTransformReplacements(replacementsMC);
-                SmeltCraftRegistry.add(recipeMirrored);
+                OvenRegistry.add(recipeMirrored);
             }
 
             @Override
             public String describe() {
-                return "Added shaped mirrored SmeltCraft recipe for " + outMC.getDisplayName();
+                return "Added shaped mirrored Oven recipe for " + outMC.getDisplayName();
             }
         });
     }

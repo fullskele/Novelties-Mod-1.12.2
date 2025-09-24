@@ -11,10 +11,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 
-public class SmeltCraftRecipeCategory implements IRecipeCategory<SmeltCraftRecipeWrapper> {
+public class OvenRecipeCategory implements IRecipeCategory<OvenRecipeWrapper> {
 
-    public static final String UID = "smeltcraft";
-    private static final ResourceLocation BG_TEXTURE = new ResourceLocation(EruptionSpawner.MODID, "textures/gui/smelt_crafter.png");
+    public static final String UID = "NB_Oven";
+    private static final ResourceLocation BG_TEXTURE = new ResourceLocation(EruptionSpawner.MODID, "textures/gui/oven.png");
 
     private final String localizedName;
     private final IDrawable background;
@@ -23,9 +23,9 @@ public class SmeltCraftRecipeCategory implements IRecipeCategory<SmeltCraftRecip
 
     private float lastXp = 0f;
 
-    public SmeltCraftRecipeCategory(IGuiHelper guiHelper) {
+    public OvenRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createBlankDrawable(148, 54);
-        this.localizedName = "Oven Smelting";
+        this.localizedName = "Oven";
 
         this.gridDrawable = guiHelper.createDrawable(BG_TEXTURE, 15, 14, 150, 55);
     }
@@ -51,7 +51,7 @@ public class SmeltCraftRecipeCategory implements IRecipeCategory<SmeltCraftRecip
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, SmeltCraftRecipeWrapper wrapper, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, OvenRecipeWrapper wrapper, IIngredients ingredients) {
         IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
 
         int index = 0;

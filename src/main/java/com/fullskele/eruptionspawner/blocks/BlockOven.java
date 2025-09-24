@@ -1,7 +1,7 @@
 package com.fullskele.eruptionspawner.blocks;
 
 import com.fullskele.eruptionspawner.EruptionSpawner;
-import com.fullskele.eruptionspawner.blocks.tile.TileSmeltCrafter;
+import com.fullskele.eruptionspawner.blocks.tile.TileOven;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockSmeltCrafter extends Block {
+public class BlockOven extends Block {
 
     public static final PropertyDirection FACING;
     static {
@@ -34,11 +34,11 @@ public class BlockSmeltCrafter extends Block {
     public static final PropertyBool BURNING = PropertyBool.create("burning");
 
 
-    public BlockSmeltCrafter() {
+    public BlockOven() {
         super(Material.ROCK);
         setHardness(3.5F);
-        setUnlocalizedName("smelt_crafter");
-        setRegistryName("smelt_crafter");
+        setUnlocalizedName("oven");
+        setRegistryName("oven");
 
         this.setDefaultState(this.blockState.getBaseState()
                 .withProperty(FACING, EnumFacing.NORTH)
@@ -86,7 +86,7 @@ public class BlockSmeltCrafter extends Block {
 
 
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) { return new TileSmeltCrafter(); }
+    public TileEntity createTileEntity(World world, IBlockState state) { return new TileOven(); }
 
 
     @Override
@@ -104,10 +104,10 @@ public class BlockSmeltCrafter extends Block {
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         TileEntity tile = worldIn.getTileEntity(pos);
-        if (tile instanceof TileSmeltCrafter) {
-            TileSmeltCrafter smelter = (TileSmeltCrafter) tile;
-            for (int i = 0; i < smelter.items.getSlots(); i++) {
-                ItemStack stack = smelter.items.getStackInSlot(i);
+        if (tile instanceof TileOven) {
+            TileOven tileOven = (TileOven) tile;
+            for (int i = 0; i < tileOven.items.getSlots(); i++) {
+                ItemStack stack = tileOven.items.getStackInSlot(i);
                 if (!stack.isEmpty() && !worldIn.isRemote) {
                     EntityItem entityItem = new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack.copy());
                     worldIn.spawnEntity(entityItem);
@@ -126,7 +126,7 @@ public class BlockSmeltCrafter extends Block {
         IBlockState state = world.getBlockState(pos);
         TileEntity tile = world.getTileEntity(pos);
 
-        if (state.getBlock() instanceof BlockSmeltCrafter) {
+        if (state.getBlock() instanceof BlockOven) {
             IBlockState newState = state.withProperty(BURNING, active);
             world.setBlockState(pos, newState, 3);
 

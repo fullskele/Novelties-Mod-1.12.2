@@ -1,18 +1,18 @@
 package com.fullskele.eruptionspawner.world.container;
 
-import com.fullskele.eruptionspawner.blocks.tile.TileSmeltCrafter;
+import com.fullskele.eruptionspawner.blocks.tile.TileOven;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 
-public class ContainerSmeltCrafter extends Container {
+public class ContainerOven extends Container {
 
 
-    private final TileSmeltCrafter tile;
+    private final TileOven tile;
 
 
-    public ContainerSmeltCrafter(InventoryPlayer playerInventory, TileSmeltCrafter tile) {
+    public ContainerOven(InventoryPlayer playerInventory, TileOven tile) {
         this.tile = tile;
 
 

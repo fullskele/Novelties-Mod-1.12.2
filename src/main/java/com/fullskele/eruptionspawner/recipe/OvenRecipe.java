@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Arrays;
 
-public class SmeltCraftRecipe {
+public class OvenRecipe {
     private final IIngredient[] inputs;
     private final ItemStack output;
     private final int cookTime;
@@ -15,7 +15,7 @@ public class SmeltCraftRecipe {
     private float experience = 0f;
     private final ItemStack[] transformReplacements = new ItemStack[9];
 
-    public SmeltCraftRecipe(IIngredient[] inputs, ItemStack output, int cookTime, boolean shapeless) {
+    public OvenRecipe(IIngredient[] inputs, ItemStack output, int cookTime, boolean shapeless) {
         if (inputs.length != 9) throw new IllegalArgumentException("inputs must be length 9");
         this.inputs = inputs;
         this.output = output.copy();

@@ -1,6 +1,6 @@
 package com.fullskele.eruptionspawner.integration.jei;
 
-import com.fullskele.eruptionspawner.recipe.SmeltCraftRecipe;
+import com.fullskele.eruptionspawner.recipe.OvenRecipe;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SmeltCraftRecipeWrapper implements IRecipeWrapper {
-    private final SmeltCraftRecipe recipe;
+public class OvenRecipeWrapper implements IRecipeWrapper {
+    private final OvenRecipe recipe;
 
-    public SmeltCraftRecipeWrapper(SmeltCraftRecipe recipe) {
+    public OvenRecipeWrapper(OvenRecipe recipe) {
         this.recipe = recipe;
     }
 
@@ -39,7 +39,7 @@ public class SmeltCraftRecipeWrapper implements IRecipeWrapper {
         ingredients.setInputLists(VanillaTypes.ITEM, inputLists);
     }
 
-    public SmeltCraftRecipe getRecipe() {
+    public OvenRecipe getRecipe() {
         return recipe;
     }
 }

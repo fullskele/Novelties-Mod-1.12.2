@@ -1,9 +1,8 @@
 package com.fullskele.eruptionspawner.blocks.tile;
 
-import com.fullskele.eruptionspawner.blocks.BlockSmeltCrafter;
-import com.fullskele.eruptionspawner.recipe.SmeltCraftRecipe;
-import com.fullskele.eruptionspawner.recipe.SmeltCraftRegistry;
-import com.fullskele.eruptionspawner.util.ModUtils;
+import com.fullskele.eruptionspawner.blocks.BlockOven;
+import com.fullskele.eruptionspawner.recipe.OvenRecipe;
+import com.fullskele.eruptionspawner.recipe.OvenRegistry;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import net.minecraft.block.Block;
@@ -11,38 +10,28 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
-import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
 //TODO: mod rebrand to 'Novelty Blocks'
-public class TileSmeltCrafter extends TileEntity implements ITickable, ISidedInventory {
+public class TileOven extends TileEntity implements ITickable, ISidedInventory {
     public static final int SLOT_FUEL = 9;
     public static final int SLOT_OUTPUT = 10;
     private float storedXp = 0f;
@@ -51,11 +40,11 @@ public class TileSmeltCrafter extends TileEntity implements ITickable, ISidedInv
     public int cookTime;
     public int cookTimeTotal = 200;
 
-    private SmeltCraftRecipe cachedRecipe = null;
+    private OvenRecipe cachedRecipe = null;
 
     private ItemStack[] lastGrid = new ItemStack[9];
 
-    public TileSmeltCrafter() {
+    public TileOven() {
         Arrays.fill(lastGrid, ItemStack.EMPTY);
     }
 
@@ -180,13 +169,13 @@ public class TileSmeltCrafter extends TileEntity implements ITickable, ISidedInv
 
             // update cached recipe only if the grid changed
             if (!gridsEqual(lastGrid, currentGrid)) {
-                cachedRecipe = SmeltCraftRegistry.match(currentGrid);
+                cachedRecipe = OvenRegistry.match(currentGrid);
                 cookTimeTotal = cachedRecipe != null ? cachedRecipe.getCookTime() : 0;
                 lastGrid = copyGrid(currentGrid);
 
             }
 
-            SmeltCraftRecipe match = cachedRecipe;
+            OvenRecipe match = cachedRecipe;
             boolean canWork = match != null && canOutput(match.getOutput());
 
             //Handle fuel
@@ -206,8 +195,8 @@ public class TileSmeltCrafter extends TileEntity implements ITickable, ISidedInv
             IBlockState state = world.getBlockState(pos);
             Block block = state.getBlock();
 
-            if (block instanceof BlockSmeltCrafter) {
-                BlockSmeltCrafter.setBurningState(isBurning(), world, pos);
+            if (block instanceof BlockOven) {
+                BlockOven.setBurningState(isBurning(), world, pos);
             }
 
             if (burnTime > 0) {
@@ -355,7 +344,7 @@ public class TileSmeltCrafter extends TileEntity implements ITickable, ISidedInv
         return newSize <= out.getMaxStackSize();
     }
 
-    private void craft(SmeltCraftRecipe recipe) {
+    private void craft(OvenRecipe recipe) {
         if (recipe == null) return;
 
         ItemStack[] grid = getGrid();
