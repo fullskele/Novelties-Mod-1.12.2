@@ -1,14 +1,14 @@
 [
 {
-  "modid": "eruptionspawner",
-  "name": "Eruption Spawner",
-  "description": "NBT-driven spawners that spew falling blocks.",
+  "modid": "novelties",
+  "name": "Novelties",
+  "description": "Random novelties for the player's world",
   "version": "1.1.0",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
   "authorList": ["fullskele"],
-  "credits": "Thanks to penteractgaming for the commission!",
+  "credits": "Thanks to penteractgaming for commissioning this mod.",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

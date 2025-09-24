@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "novelties:blocks/eruptor_block"
+  }
+}
