@@ -3,7 +3,7 @@
   "modid": "novelties",
   "name": "Novelties",
   "description": "Random novelties for the player's world",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",

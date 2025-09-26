@@ -178,6 +178,12 @@ public class TileOven extends TileEntity implements ITickable, ISidedInventory {
             OvenRecipe match = cachedRecipe;
             boolean canWork = match != null && canOutput(match.getOutput());
 
+            if (burnTime > 0) {
+                burnTime--;
+            } else {
+                currentItemBurnTime = 0;
+            }
+
             //Handle fuel
             if (!isBurning() && canWork) {
                 ItemStack fuel = items.getStackInSlot(SLOT_FUEL);
@@ -197,12 +203,6 @@ public class TileOven extends TileEntity implements ITickable, ISidedInventory {
 
             if (block instanceof BlockOven) {
                 BlockOven.setBurningState(isBurning(), world, pos);
-            }
-
-            if (burnTime > 0) {
-                burnTime--;
-            } else {
-                currentItemBurnTime = 0;
             }
 
             world.checkLightFor(EnumSkyBlock.BLOCK, pos);
